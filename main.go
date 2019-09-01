@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"resumator-backend/config"
 	"resumator-backend/logger"
 	"resumator-backend/routes"
 	"sync"
@@ -17,6 +18,8 @@ func main() {
 	waitGroup.Add(1)
 	log = logger.GetLogger()
 	log.Info("starting the Resumator Backend...")
+	config.Initialize()
+	log.Infof("config linkedIn url %s", config.GetLinkedInAccessTokenURL())
 	go startServer()
 	waitGroup.Wait()
 }
